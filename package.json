@@ -8,7 +8,12 @@
   },
   "scripts": {
     "start": "make start",
-    "deploy": "make build && gh-pages -d docs"
+    "deploy": "make build && gh-pages -d docs && make stop"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run deploy"
+    }
   },
   "repository": {
     "type": "git",
@@ -17,6 +22,7 @@
   "author": "rajesh.sundaram",
   "license": "ISC",
   "dependencies": {
-    "gh-pages": "^3.1.0"
+    "gh-pages": "^3.1.0",
+    "husky": "^4.3.0"
   }
 }
