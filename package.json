@@ -1,0 +1,22 @@
+{
+  "name": "web-security",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Makefile",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "make start",
+    "deploy": "make build && gh-pages -d docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "DevPGit:RajeshSundaram/web-security.git"
+  },
+  "author": "rajesh.sundaram",
+  "license": "ISC",
+  "dependencies": {
+    "gh-pages": "^3.1.0"
+  }
+}

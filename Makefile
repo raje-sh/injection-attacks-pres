@@ -11,3 +11,5 @@ build:
 	@for directory in css js lib index.html ; do \
 		docker container cp ${CONTAINER_NAME}:/reveal.js/$$directory ./docs; \
 	done
+deploy:
+	npm run deploy

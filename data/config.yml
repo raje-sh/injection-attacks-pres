@@ -4,10 +4,10 @@ slides: []
 
 # Theme for all slides.  Following themes are available:
 # black(default), white, league, sky, beige, simple, serif, blood, night, moon, solarized
-theme: black
+theme: solarized
 
 # Title of the index.html page.
-title: reveal.js
+title: web-security
 
 revealjs:
   # The "normal" size of the presentation, aspect ratio will be preserved
@@ -40,7 +40,7 @@ revealjs:
   progress: true
 
   # Display the page number of the current slide
-  slideNumber: false
+  slideNumber: true
 
   # Use 1 based indexing for # links to match slide number (default is zero
   # based)
@@ -149,10 +149,10 @@ revealjs:
   focusBodyOnPageVisibilityChange: true
 
   # Transition style
-  transition: "slide" # none/fade/slide/convex/concave/zoom
+  transition: "convex" # none/fade/slide/convex/concave/zoom
 
   # Transition speed
-  transitionSpeed: "default" # default/fast/slow
+  transitionSpeed: "slow" # default/fast/slow
 
   # Transition style for full page slide backgrounds
   backgroundTransition: "fade" # none/fade/slide/convex/concave/zoom
