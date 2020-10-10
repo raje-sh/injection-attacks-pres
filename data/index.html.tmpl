@@ -12,6 +12,38 @@
                 <!-- Theme used for syntax highlighting of code -->
                 <link rel="stylesheet" href="lib/css/zenburn.css">
 
+                <link href="https://vjs.zencdn.net/7.8.4/video-js.css" rel="stylesheet" />
+                <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+                <script>
+Vue.directive("highlightjs", {
+        deep: true,
+        bind: function (el, binding) {
+          // on first bind, highlight all targets
+          let targets = el.querySelectorAll("code");
+          targets.forEach((target) => {
+            // if a value is directly assigned to the directive, use this
+            // instead of the element content.
+            if (binding.value) {
+              target.textContent = binding.value;
+            }
+            hljs.highlightBlock(target);
+          });
+        },
+        componentUpdated: function (el, binding) {
+          // after an update, re-fill the content and then highlight
+          let targets = el.querySelectorAll("code");
+          targets.forEach((target) => {
+            if (binding.value) {
+              target.textContent = binding.value;
+              hljs.highlightBlock(target);
+            }
+          });
+        },
+      });
+                </script>
+
                 <!-- Printing and PDF exports -->
                 <script>
                         var link = document.createElement( 'link' );
@@ -43,5 +75,6 @@
                                 {{ end }}
                         });
                 </script>
+                <script src="https://vjs.zencdn.net/7.8.4/video.js"></script> 
         </body>
 </html>

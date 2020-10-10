@@ -1,23 +1,37 @@
 <section>
-    <section>
-        <h2>Vertical Slides</h2>
-        <p>Slides can be nested inside of each other.</p>
-        <p>Use the <em>Space</em> key to navigate through all slides.</p>
-        <br>
-        <a href="#" class="navigate-down">
-            <img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-        </a>
-    </section>
-    <section>
-        <h2>Basement Level 1</h2>
-        <p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
-    </section>
-    <section>
-        <h2>Basement Level 2</h2>
-        <p>That's it, time to go back up.</p>
-        <br>
-        <a href="#/2">
-            <img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
-        </a>
-    </section>
+  <h2>Web Attacks</h2>
+  <div class="web-attack-container">
+    <div class="info">
+      <ul>
+        <li>9 out of 10 web applications are vulnerable</li>
+        <li>Almost 1/3 of total attacks are injection attacks</li>
+      </ul>
+    </div>
+    <div class="map-container">
+      <iframe
+        class="map"
+        height="400"
+        width="500"
+        src="https://threatmap.checkpoint.com/"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
 </section>
+<style>
+  .web-attack-container {
+    display: flex;
+  }
+  .web-attack-container .info {
+    width: 80%;
+  }
+  .web-attack-container .map-container {
+    display: flex;
+    align-items: center;
+    min-height: 400px;
+  }
+  .web-attack-container .map-container iframe {
+    height: 80%;
+  }
+</style>
