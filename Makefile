@@ -11,6 +11,6 @@ stop:
 
 build: run
 	# docker-compose run --rm revealjs build
-	@for directory in css js lib index.html ; do \
+	@for directory in plugin css js lib index.html ; do \
 		docker container cp ${CONTAINER_NAME}:/reveal.js/$$directory ./docs; \
 	done
