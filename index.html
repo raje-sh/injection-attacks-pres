@@ -12,6 +12,38 @@
                 <!-- Theme used for syntax highlighting of code -->
                 <link rel="stylesheet" href="lib/css/zenburn.css">
 
+                <link href="https://vjs.zencdn.net/7.8.4/video-js.css" rel="stylesheet" />
+                <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+                <script>
+Vue.directive("highlightjs", {
+        deep: true,
+        bind: function (el, binding) {
+          // on first bind, highlight all targets
+          let targets = el.querySelectorAll("code");
+          targets.forEach((target) => {
+            // if a value is directly assigned to the directive, use this
+            // instead of the element content.
+            if (binding.value) {
+              target.textContent = binding.value;
+            }
+            hljs.highlightBlock(target);
+          });
+        },
+        componentUpdated: function (el, binding) {
+          // after an update, re-fill the content and then highlight
+          let targets = el.querySelectorAll("code");
+          targets.forEach((target) => {
+            if (binding.value) {
+              target.textContent = binding.value;
+              hljs.highlightBlock(target);
+            }
+          });
+        },
+      });
+                </script>
+
                 <!-- Printing and PDF exports -->
                 <script>
                         var link = document.createElement( 'link' );
@@ -26,330 +58,348 @@
                         <div class="slides">
 
 <section>
-  <h1>Hello World</h1>
-  <h3>The HTML Presentation Framework</h3>
-  <p>
-    <small
-      >Created by <a href="http://hakim.se">Hakim El Hattab</a> and
-      <a href="https://github.com/hakimel/reveal.js/graphs/contributors"
-        >contributors</a
-      ></small
-    >
+  <h1>Injection Attacks</h1>
+  <p style="float: right; text-align: right; margin-right: 2em">
+    Rajesh Sundaram
+    <br />
+    Mini App Developer
   </p>
 </section>
 
 
 <section>
-    <h2>Hello There</h2>
-    <p>
-        reveal.js enables you to create beautiful interactive slide decks using HTML. This presentation will show you examples of what it can do.
-    </p>
-</section>
-
-<section>
-    <section>
-        <h2>Vertical Slides</h2>
-        <p>Slides can be nested inside of each other.</p>
-        <p>Use the <em>Space</em> key to navigate through all slides.</p>
-        <br>
-        <a href="#" class="navigate-down">
-            <img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-        </a>
-    </section>
-    <section>
-        <h2>Basement Level 1</h2>
-        <p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
-    </section>
-    <section>
-        <h2>Basement Level 2</h2>
-        <p>That's it, time to go back up.</p>
-        <br>
-        <a href="#/2">
-            <img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
-        </a>
-    </section>
-</section>
-
-<section>
-    <h2>Point of View</h2>
-    <p>
-        Press <strong>ESC</strong> to enter the slide overview.
-    </p>
-    <p>
-        Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-    </p>
-</section>
-
-<section>
-    <h2>Touch Optimized</h2>
-    <p>
-        Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
-    </p>
-</section>
-
-<section data-markdown="data/slides/07.md"></section>
-
-<section>
-    <section id="fragments">
-        <h2>Fragments</h2>
-        <p>Hit the next arrow...</p>
-        <p class="fragment">... to step through ...</p>
-        <p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
-
-        <aside class="notes">
-            This slide has fragments which are also stepped through in the notes window.
-        </aside>
-    </section>
-    <section>
-        <h2>Fragment Styles</h2>
-        <p>There's different types of fragments, like:</p>
-        <p class="fragment grow">grow</p>
-        <p class="fragment shrink">shrink</p>
-        <p class="fragment fade-out">fade-out</p>
-        <p>
-            <span style="display: inline-block;" class="fragment fade-right">fade-right, </span>
-            <span style="display: inline-block;" class="fragment fade-up">up, </span>
-            <span style="display: inline-block;" class="fragment fade-down">down, </span>
-            <span style="display: inline-block;" class="fragment fade-left">left</span>
-        </p>
-        <p class="fragment fade-in-then-out">fade-in-then-out</p>
-        <p class="fragment fade-in-then-semi-out">fade-in-then-semi-out</p>
-        <p>Highlight <span class="fragment highlight-red">red</span> <span class="fragment highlight-blue">blue</span> <span class="fragment highlight-green">green</span></p>
-    </section>
-</section>
-
-<section id="transitions">
-    <h2>Transition Styles</h2>
-    <p>
-        You can select from different transitions, like: <br>
-        <a href="?transition=none#/transitions">None</a> -
-        <a href="?transition=fade#/transitions">Fade</a> -
-        <a href="?transition=slide#/transitions">Slide</a> -
-        <a href="?transition=convex#/transitions">Convex</a> -
-        <a href="?transition=concave#/transitions">Concave</a> -
-        <a href="?transition=zoom#/transitions">Zoom</a>
-    </p>
-</section>
-
-<section id="themes">
-    <h2>Themes</h2>
-    <p>
-        reveal.js comes with a few themes built in: <br>
-        <!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
-        <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
-        <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
-        <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
-        <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
-        <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
-        <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
-        <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
-        <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/blood.css'); return false;">Blood</a> -
-        <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
-        <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
-        <a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
-    </p>
-</section>
-
-<section>
-    <section data-background="#dddddd">
-        <h2>Slide Backgrounds</h2>
-        <p>
-            Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
-        </p>
-        <a href="#" class="navigate-down">
-            <img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-        </a>
-    </section>
-    <section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
-        <h2>Image Backgrounds</h2>
-        <pre><code class="hljs">&lt;section data-background="image.png"&gt;</code></pre>
-    </section>
-    <section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
-        <h2>Tiled Backgrounds</h2>
-        <pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
-    </section>
-    <section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-color="#000000">
-        <div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-            <h2>Video Backgrounds</h2>
-            <pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
-        </div>
-    </section>
-    <section data-background="http://i.giphy.com/90F8aUepslB84.gif">
-        <h2>... and GIFs!</h2>
-    </section>
-</section>
-
-<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-    <h2>Background Transitions</h2>
-    <p>
-        Different background transitions are available via the backgroundTransition option. This one's called "zoom".
-    </p>
-    <pre><code class="hljs">Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
-</section>
-
-<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-    <h2>Background Transitions</h2>
-    <p>
-        You can override background transitions per-slide.
-    </p>
-    <pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
-</section>
-
-<section>
-    <h2>Pretty Code</h2>
-    <pre><code class="hljs" data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
+  <h2>What are Injection Attacks?</h2>
+  <ul class="intro-list">
+    <li>
+      Injection of malicious code in to the network which fetches all the
+      information from the database to the attacker
+    </li>
+    <li class="fragment">
+      Number one web application security risk in the OWASP Top 10 2017
+    </li>
+    <li class="fragment">
+      Considered as oldest and most dangerous attacks as this can lead to data
+      theft, data loss & complete system compromise
+    </li>
+  </ul>
+  <div class="diagram-illustration">
+    <img
+      class="r-stretch"
+      src="https://sectigostore.com/blog/wp-content/uploads/2020/06/sql-injection-attack-breakdown.png"
+      alt=""
+    />
+  </div>
+  <style>
+    .intro-list li {
+      font-size: 0.8em;
     }
+  </style>
+</section>
+
+
+<section>
+  <h2>Web Attacks</h2>
+  <div class="web-attack-container">
+    <div class="info">
+      <ul>
+        <li>9 out of 10 web applications are vulnerable</li>
+        <li>Almost 1/3 of total attacks are injection attacks</li>
+      </ul>
+    </div>
+    <div class="map-container">
+      <iframe
+        class="map"
+        height="400"
+        width="500"
+        src="https://threatmap.checkpoint.com/"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</section>
+<style>
+  .web-attack-container {
+    display: flex;
   }
-}
-    </code></pre>
-    <p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-</section>
+  .web-attack-container .info {
+    width: 80%;
+  }
+  .web-attack-container .map-container {
+    display: flex;
+    align-items: center;
+    min-height: 400px;
+  }
+  .web-attack-container .map-container iframe {
+    height: 80%;
+  }
+</style>
+
 
 <section>
-    <h2>Marvelous List</h2>
+  <h3>Most Dangerous Injection Attacks</h3>
+  <ul>
+    <li>SQL Injection</li>
+    <li>Cross-Site Scripting</li>
+    <li>OS Command Injection</li>
+    <li>Code Injection</li>
+    <!-- <li>XPath Injection</li>
+    <li>Template Injection</li>
+    <li>CRLF Injection</li>
+    <li>Email Header Injection</li>
+    <li>Host Header Injection</li>
+    <li>LDAP Injection</li> -->
+  </ul>
+</section>
+
+
+<section>
+  <section>
+    <h2>SQL Injection</h2>
     <ul>
-        <li>No order here</li>
-        <li>Or here</li>
-        <li>Or here</li>
-        <li>Or here</li>
+      <li>
+        Insertion malicious SQL statements as user-input to attack data-driven
+        applications
+      </li>
     </ul>
-</section>
+    <div class="diagram-illustration">
+      <img
+        class="r-stretch"
+        src="https://sectigostore.com/blog/wp-content/uploads/2020/06/sql-injection-attack-breakdown.png"
+        alt=""
+      />
+    </div>
+  </section>
+  <section>
+    <h2>Example</h2>
+    <div id="sql-vue-inject-app">
+      <fieldset class="login-container">
+        <legend>Web Client</legend>
+        <label for="uname"><b>Username</b></label>
+        <input
+          type="text"
+          v-model="username"
+          placeholder="Enter Username"
+          name="uname"
+          required
+        />
 
-<section>
-    <h2>Fantastic Ordered List</h2>
-    <ol>
-        <li>One is smaller than...</li>
-        <li>Two is smaller than...</li>
-        <li>Three!</li>
-    </ol>
-</section>
+        <label for="psw"><b>Password</b></label>
+        <input
+          type="password"
+          v-model="password"
+          placeholder="Enter Password"
+          name="psw"
+          required
+        />
+        <button>Login</button>
+      </fieldset>
+      <div class="backend">
+        <fieldset class="backend-query-viewer">
+          <legend>Server Logic</legend>
+          <pre v-highlightjs="serverCode">
+              <code class="js" data-trim contenteditable>
+              </code>
+            </pre>
+        </fieldset>
+        <fieldset class="backend-query-viewer">
+          <legend>Executed Query</legend>
+          <pre v-highlightjs="sqlQuery">
+              <code class="sql" data-trim contenteditable>
+              </code>
+            </pre>
+        </fieldset>
+      </div>
+    </div>
+    <script>
+      new Vue({
+        el: "#sql-vue-inject-app",
+        data() {
+          return {
+            username: "",
+            password: "",
+          };
+        },
+        computed: {
+          serverCode: function () {
+            return `
+const username = req.body.username; // ${this.username}
+const password = req.body.password; // ${this.password}
+await connection.query(
+ \`SELECT * FROM Users 
+  WHERE username ='\$\{username\}'
+  AND password = '\$\{hash(password)\}'\`);
+  ........
+    `;
+          },
+          sqlQuery: function () {
+            return `
+SELECT * FROM Users 
+WHERE username = '${this.username}' AND password = '${btoa(this.password)}'
+    `;
+          },
+        },
+      });
+    </script>
+    <style>
+      #sql-vue-inject-app .backend-query-viewer {
+        font-size: 0.6em;
+      }
+      #sql-vue-inject-app .backend-query-viewer pre {
+        margin: 1em 0px 0px 1em;
+      }
 
-<section>
-    <h2>Tabular Tables</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Item</th>
-                <th>Value</th>
-                <th>Quantity</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Apples</td>
-                <td>$1</td>
-                <td>7</td>
-            </tr>
-            <tr>
-                <td>Lemonade</td>
-                <td>$2</td>
-                <td>18</td>
-            </tr>
-            <tr>
-                <td>Bread</td>
-                <td>$3</td>
-                <td>2</td>
-            </tr>
-        </tbody>
-    </table>
-</section>
+      #sql-vue-inject-app {
+        justify-content: center;
+        align-items: center;
+        display: grid;
+        grid-template-columns: 25% 60%;
+      }
 
-<section>
-    <h2>Clever Quotes</h2>
-    <p>
-        These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">The nice thing about standards is that there are so many to choose from</q> and block:
-    </p>
-    <blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-        &ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-        reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-    </blockquote>
-</section>
+      #sql-vue-inject-app .login-container {
+        max-width: 300px;
+        padding: 16px;
+        font-size: 16px;
+        border: 1px solid;
+      }
+      #sql-vue-inject-app input[type="text"],
+      #sql-vue-inject-app input[type="password"] {
+        font-size: 14px;
+        width: 100%;
+        padding: 8px 10px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+      #sql-vue-inject-app label {
+        float: left;
+      }
 
-<section>
-    <h2>Intergalactic Interconnections</h2>
-    <p>
-        You can link between slides internally,
-        <a href="#/2/3">like this</a>.
-    </p>
-</section>
+      #sql-vue-inject-app button {
+        background-color: #4caf50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+      }
 
-<section>
-    <h2>Speaker View</h2>
-    <p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
-    <p>Press the <em>S</em> key to try it out.</p>
-
-    <aside class="notes">
-        Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-    </aside>
-</section>
-
-<section>
-    <h2>Export to PDF</h2>
-    <p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
-    <iframe data-src="https://www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-</section>
-
-<section>
-    <h2>Global State</h2>
-    <p>
-        Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-        will be added as a class to the document element when the slide is open. This lets you
-        apply broader style changes, like switching the page background.
-    </p>
-</section>
-
-<section data-state="customevent">
-    <h2>State Events</h2>
-    <p>
-        Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-    </p>
-    <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Reveal.addEventListener( 'customevent', function() {
-  console.log( '"customevent" has fired' );
-} );
-    </code></pre>
-</section>
-
-
-<section>
-    <h2>Take a Moment</h2>
-    <p>
-        Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
-    </p>
-</section>
-
-
-<section>
-    <h2>Much more</h2>
+      #sql-vue-inject-app button:hover {
+        opacity: 0.8;
+      }
+    </style>
+  </section>
+  <section>
+    <h2>Demo</h2>
+    <div style="position: relative; padding-bottom: 56.25%; height: 0">
+      <iframe
+        src="https://fluvid.com/videos/detail/5AZ3jhDweaSVDxkjd/embed"
+        frameborder="0"
+        webkitallowfullscreen
+        mozallowfullscreen
+        allowfullscreen
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%"
+      ></iframe>
+    </div>
+  </section>
+  <section>
+    <h2>Prevention</h2>
     <ul>
-        <li>Right-to-left support</li>
-        <li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
-        <li><a href="https://github.com/hakimel/reveal.js#auto-sliding">Auto-progression</a></li>
-        <li><a href="https://github.com/hakimel/reveal.js#parallax-background">Parallax backgrounds</a></li>
-        <li><a href="https://github.com/hakimel/reveal.js#keyboard-bindings">Custom keyboard bindings</a></li>
+      <li>Don’t trust any User-Supplied Input</li>
+      <li>Usage of Prepared Statements</li>
+      <li>Stop writing dynamic queries</li>
     </ul>
+  </section>
 </section>
 
-<section style="text-align: left">
-  <h1>THE END</h1>
-  <p>
-    - <a href="https://slides.com">Try the online editor</a> <br />
-    -
-    <a href="https://github.com/hakimel/reveal.js"
-      >Source code &amp; documentation</a
-    >
-  </p>
+
+<section>
+  <h2>Cross-Site Scripting</h2>
+  <ul>
+    <li>
+      Attacker inject javascript into an application to
+      <b>fool a user to get data</b>
+      from them
+    </li>
+    <li>
+      One estimate is that <b>94% of web applications</b> are vulnerable to XSS
+    </li>
+  </ul>
+  <div class="diagram-illustration">
+    <img
+      class="r-stretch"
+      style="width: 60%"
+      src="https://blog.sqreen.com/wp-content/uploads/2018/03/reflexted-xss.png"
+      alt=""
+    />
+  </div>
+</section>
+
+
+<section>
+  <h2>OS Command Injection</h2>
+  <ul>
+    <li>
+      Attacker inject javascript into an application to
+      <b>fool a user to get data</b>
+      from them
+    </li>
+    <li>
+      One estimate is that <b>94% of web applications</b> are vulnerable to XSS
+    </li>
+  </ul>
+  <div class="diagram-illustration">
+    <img
+      class="r-stretch"
+      style="width: 60%"
+      src="https://blog.sqreen.com/wp-content/uploads/2018/03/reflexted-xss.png"
+      alt=""
+    />
+  </div>
+</section>
+
+
+<section>
+  <h2>Code Injection</h2>
+  <ul>
+    <li>
+      Attacker inject javascript into an application to
+      <b>fool a user to get data</b>
+      from them
+    </li>
+    <li>
+      One estimate is that <b>94% of web applications</b> are vulnerable to XSS
+    </li>
+  </ul>
+  <div class="diagram-illustration">
+    <img
+      class="r-stretch"
+      style="width: 60%"
+      src="https://blog.sqreen.com/wp-content/uploads/2018/03/reflexted-xss.png"
+      alt=""
+    />
+  </div>
+</section>
+
+
+<section>
+  <blockquote>
+    &ldquo;<b>Technology trust</b><br />
+    is a good thing <br /><b>but control</b><br />
+    is better one&rdquo;<br />
+    <small class="author" style="float: right"> - Stephane Nappo</small>
+  </blockquote>
+  <div class="thanks">🙏 Thanks</div>
+  <style>
+    .thanks {
+      font-size: 2em !important;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+  </style>
 </section>
 
 
@@ -379,7 +429,9 @@ Reveal.addEventListener( 'customevent', function() {
   { src: 'plugin/markdown/marked.js' },
   { src: 'plugin/markdown/markdown.js' },
   { src: 'plugin/notes/notes.js', async: true },
-  { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+  { src: 'plugin/highlight/highlight.js', async: true, callback: function() { 
+    hljs.initHighlightingOnLoad();
+     } },
   { src: 'plugin/zoom-js/zoom.js', async: true }
 ]
 ,
@@ -430,5 +482,6 @@ Reveal.addEventListener( 'customevent', function() {
                                 
                         });
                 </script>
+                <script src="https://vjs.zencdn.net/7.8.4/video.js"></script> 
         </body>
 </html>
