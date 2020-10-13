@@ -9,10 +9,10 @@ services:
     volumes:
       - "./data:/reveal.js/data"
       - "./docs:/reveal.js/build"
-  juiceshop:
-    image: bkimminich/juice-shop
-    ports:
-      - "3000:3000"
-    environment:
-      # - NODE_ENV=tutorial
-      - NODE_ENV=ctf
+  # juiceshop:
+  #   image: bkimminich/juice-shop
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     # - NODE_ENV=tutorial
+  #     - NODE_ENV=ctf

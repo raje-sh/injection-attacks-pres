@@ -1,10 +1,42 @@
-<section>
-  <h2>Prevention</h2>
-  <ul>
-    <li>Don’t trust any User-Supplied Input</li>
-    <li>Input Validation/Sanitization</li>
-    <li>Parametrized queries</li>
-    <li>Web application firewall</li>
-    <li>Regular scanning of application with web vulnerability scanner</li>
-  </ul>
+<section style="font-size: 0.8em">
+  <section>
+    <h2>Prevention</h2>
+    <ul>
+      <li>Don’t trust any user-supplied input</li>
+      <li>
+        <span>Proper validation and sanitization</span>
+        <pre><code class="js">
+// Mount express-sanitizer middleware here
+app.use(expressSanitizer());
+app.post('/', function(req, res, next) {
+  // replace an HTTP posted body property with the sanitized string
+  const sanitizedString = req.sanitize(req.body.propertyToSanitize);
+  res.send({ sanitized: sanitizedString });
+});
+        </code></pre>
+      </li>
+      <li>
+        <span> Parametrized queries </span>
+        <pre><code class="java">
+String sql = "SELECT STUDENT FROM SCHOOL WHERE SCHOOL LIKE ? ";
+PreparedStatement prepStmt = conn.prepareStatement(sql);
+prepStmt.setString(1, "Waterloo%");
+ResultSet rs = prepStmt.executeQuery();
+        </code></pre>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Prevention</h2>
+    <ul>
+      <li>
+        <span>WAF</span>
+        <img
+          src="https://avinetworks.com/wp-content/uploads/2018/08/web-application-firewall-simple-diagram_1.jpg"
+          alt=""
+        />
+      </li>
+      <li>Regular scanning with web vulnerability scanner</li>
+    </ul>
+  </section>
 </section>
